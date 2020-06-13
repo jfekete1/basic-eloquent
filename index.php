@@ -1,6 +1,5 @@
 <?php
 	require __DIR__.'/./config/bootstrap.php';
-	//$_SERVER['DOCUMENT_ROOT'] = "/c/xampp/htdocs/api/basic-eloquent/";
 	
 	function http_status_code($code) {
 		return http_response_code($code);

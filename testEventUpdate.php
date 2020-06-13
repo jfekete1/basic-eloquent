@@ -1,15 +1,8 @@
 <?php
 
 require __DIR__.'/./config/bootstrap.php';
+require __DIR__.'/./libs/globalFunctions.php';
 
-// get posted data
-function json_decode_nice($json, $assoc = FALSE)
-{
-    $json = str_replace(array("\n", "\r"), "", $json);
-    $json = preg_replace('/([{,]+)(\s*)([^"]+?)\s*:/', '$1"$3":', $json);
-    $json = preg_replace('/(,)\s*}$/', '}', $json);
-    return json_decode($json, $assoc);
-}
 $sJson = file_get_contents("php://input");
 $data = json_decode_nice($sJson);
 

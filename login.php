@@ -18,12 +18,6 @@ use \Firebase\JWT\JWT;
 $sJson = file_get_contents("php://input");
 $data = json_decode_nice($sJson);
 
-//Log the user in checking the username and password he provided !
-/*$asdf = gettype($data);
-echo $asdf;
-exit;
-//if(array_key_exists("username",$data)){
-*/
 if(isset($data->username)){
     $user = UsersModel::where('username', $data->username)->first();
 }

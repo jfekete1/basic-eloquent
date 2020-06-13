@@ -45,6 +45,7 @@ if (
         $data = array(
             "channel" => "testchan",
             "payload" => "Event created guys !!"
+            //to => [] GET THE USERS SUBSCRIBED TO THIS EVENT CATEGORY, AND ONLY SEND NOTIFICATION TO THEM !!
         );
         $content = json_encode($data);
 

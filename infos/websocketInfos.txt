@@ -3,4 +3,24 @@ download wsify-2.3.zip
 extract it
 
 start websocket:
+cd  ~/Documents/wsTest
 ./wsify_windows_amd64.exe --webhook="http://localhost:80/api/basic-eloquent/index.php"
+
+-connect with Simple WebSocket clients:
+URL:
+ws://localhost:4040/subscribe?key=client1
+Request:
+{
+  "action": "subscribe",
+  "value": "testchan"
+}
+
+-POST notification to clients(use PHP or postman for test):
+URL:
+http://localhost:4040/publish
+Request:
+{
+  "channel": "testchan",
+  "payload": "hello dudes",
+  "to": ["client1"]
+}
