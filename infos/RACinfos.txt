@@ -1,0 +1,141 @@
+Oracle DataGuard is the right solution for disaster recovery !!
+(Létezik Oracle RAC One Node option, aminek olcsó a liszensze)
+
+Oracle Parallel Server (OPS) ebből lett később a RAC
+  Oracle 6.2-ben jött be elősször
+a RAC a 9i verzióban jelent meg elősször
+  ebben már jelen volt a clusterware és a Cache Fusion technológiák
+
+Oracle Grid Infrastructure:
+-clusterware
+  manage the whole cluster
+  monitor the availability of the resources
+  controls the resources startup order
+  can be programmed for user applications
+-ASM
+  manages the shared strorage layer
+
+Oracle Database:
+  ORDBMS software running on nodes
+
+Private Network:
+-High speed Fully separated network, only oracle nodes should be in this network, otherwise there will be errors
+-No default gateway
+-Manages hearth beat traffic
+
+
+The Public network's public IPs are of the same class like the Virtual IPs
+Virtual IPs are managed by the clusterware, public IP-s by the router...
+If the node goes down, the clusterware immediately notifies the client (if the VIP is down immediate notification, there is no delays, like in the TCP protocoll...)
+The Virtual IP will fail over to another node, thus the traffic can continue.
+
+
+fibrechannel or ICSI network needed for shared storage, because all the nodes use it simultaniously to store data and metadata.
+
+
+Session load balance will not work properly, if the nodes have different hardware resourcces.
+Nodes should have similar hardware, or should be Virtual machines configured samely
+All the node should have the same OS, and have atleast 2 network cards, but it is recommended to have 3 network cards, 2 for private 1 for public
+The phisical network cards can be bound into a single logical network using OS network bonding utilities, like Linux Bonding or Microsoft NIC Teaming for HA and load balancing
+Shared storage should also have redundant network connection with the servers
+  For example to connect to a fibrechannel storage you need to install 2 HBA (Host Bus Adaptors) in every node
+  the card has redundant fiber links connecting to two fibrechannel switches
+  each switch is connected to two fibre channel controllers
+
+When you migrate a single instance non cluster oracle database to Oracle RAC there are a few considerations you have to take into account
+regarding sizing the memory:
+  Increase the buffer cache by more than 10%
+  The shared pool by atleast 15%
+  + the memory used by ASM and clusterware processes
+Memory consumed by client sessions will be distributed among the instances
+
+
+Vannak Oracle Engineered Systems szerverek, amik direktbe RAC-ra lettek optimalizálva.
+Ha nincs pénz mérnöki tervezésre, akkor célszerű ilyet venni !!
+
+
+Kis cégeknek elég az Oracle Database Appliance féle RAC (ODA)
+  előny: Max performance, easy management
+  hátrány: csak 2 node-os lehet
+  Oracle Database Appliance EM Plug-in 13.4.1.0.0
+  https://www.oracle.com/database/technologies/db-appliance-downloads.html
+
+Oracle Exadata Database machine
+  nagy cégeknek
+
+
+Cluster ready Service (CRS) resources:
+-ASM instances
+-ASM Diskgroup
+-VIP services
+-SCAN
+-SCAN listener
+-database services
+-Oracle Net listener
+-Oracle notification service (ONS)
+      this service is used to notify the clients about the state of oracle instances, if an instance goes down ONS takes care
+      of informing the registered clients about this failure.
+
+
+Data in SHARED storage:
+-Voting files for node membership
+    12c előtt Voting Disk-nek hívták, mert külön disk-re volt rakva
+    jelenleg voting file-nak nevezik
+-Oracle clusterware Registry (OCR) information
+
+Data in LOCAL storage:
+-Oracle Local Registry (OLR): metadata for the local node
+-Grid Plug and Play (GPnP) profile: network profile and VD
+
+
+The more nodes you have, the busier the traffic will be in the private interconnect network
+
+A Grid Home azért kell külön legyen az Oracle Base directory-tól(Oracle home), mert az installer megváltoztatja az ownerét az oracle base dir-nek ROOT-ra telepítés végén...
+
+ORACLE ÜZEMELTETÉS RÉSZLETEK:
+Clusterware szolgáltatások (CRS daemons and Services) ellenőrzése...
+CRS    -    CRSD    -->    Start, stop, monitor, and failover operations on resources
+CSS Service    -    ocssd.bin    -->    Monitors the node membership in the cluster and updates the node status information in Voting Disk (VD)
+CSS Agent    -    cssagent    -->    Monitors, starts, and stops the Cluster Synchronization Services (CSS)
+CSS Monitor    -    cssdmonitor    -->    It works together with the CSS agent to provide data integrity in the clusterware. Based on the CPU startvation or OS status, it may reboot the node.
+CTSS    -    octssd.bin    -->    Maintains time sync among all nodes
+EVM    -    evmd.bin    -->    Publishes events to all the cluster nodes
+ONS    -    ons    -->    Manages the Fast Application Notification (FAN) events
+Oracle Agent    -    oraagent    -->    Managing ohasd resources owned by oracle
+Oracle Root Agent    -    orarootagen    -->    Managing ohasd resources owned by Root
+
+
+Checking on the Oracle Clusterware Stack Components:
+As root, run this:
+  crsctl check cluster
+As grid user run these:
+  srvctl status ASM
+  cluvfy comp SCAN
+
+As root
+Download and install latest patchset updates (PSU)
+
+
+
+As oracle:dba 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

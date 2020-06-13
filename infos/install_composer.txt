@@ -1,0 +1,8 @@
+This script will install composer in the current directory (pl. htdocs)
+
+After composer install use it like so:
+-Install Eloquent ORM:
+  php composer.phar require illuminate/database
+
+-Let composer load your own classes:
+  php /d/CMSMS/xamppZegProg/htdocs/composer.phar install

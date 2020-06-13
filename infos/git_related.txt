@@ -1,0 +1,24 @@
+commands that I ran:
+git clone https://github.com/stemword/use-eloquent-in-php-without-laravel.git
+cd use-eloquent-in-php-without-laravel
+git remote
+(it will say origin... We have to remove that shit)
+git remote remove origin
+(NEW CREATE NEW REPO ON GITHUB !!)
+(copy HTTPS or SSH repo path)
+git remote add origin git@github.com:jfekete1/basic-eloquent.git
+
+(now we can push all the cloned repo's code to our repo...)
+git push origin master
+(ha ez nem megy, akkor lépj be github oldalon és Settings -> SSH and GPG keys --> New SSH key és ide másold be a pubKeyed)
+        cat /c/Users/jfekete1/.ssh/id_rsa.pub
+
+		
+FEJLESZTÉS:
+(miután fejlesztünk ki kell adni ezeket:)
+git status
+  (ez kiírja mik az untracked fájlok)
+git add -A
+  (ez hozzáadja az untracked fájlokat a trackedekhez)
+git commit -m 'commit üzenet'
+git push origin master

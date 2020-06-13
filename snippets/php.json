@@ -1,0 +1,26 @@
+{
+
+	"Create database Eloquent Model": {
+        "prefix": "EloqMC",
+        "body": [
+			"use Illuminate\\Database\\Eloquent\\Model as Eloquent;",
+			"\n",
+			"class EventsModel extends Eloquent {",
+			"",
+			"\t protected \\$table = '${tablaNeve}';",
+			"\t public \\$primaryKey = '${primaryKey}';",
+			"\n",
+			"\t protected \\$fillable = [",
+			"\t '${primaryKey}',",
+			"\t '${anotherField}',",
+			"\t ];",
+			"\n",
+			"\t public function ${todo}()",
+			"\t {",
+			"\t\t return \\$this->hasMany('${todo}');",
+			"\t }",
+			"}"
+        ],
+        "description": "Create Model Query"
+    }
+}
