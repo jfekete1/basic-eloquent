@@ -1,0 +1,30 @@
+
+
+Login via API:
+-URL
+http://localhost/working/basic-eloquent-master/login.php
+-POST data to send:
+{
+    "username": "jozsi",
+    "password": "jozsi123"
+}
+
+check JWT token received after login:
+-URL
+http://localhost/working/basic-eloquent-master/checkJWT.php
+-POST data to send
+{
+    "jwt":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3LnplZ3Byb2dyYW0uaHVcLyIsImF1ZCI6Imh0dHBzOlwvXC93d3cuemVncHJvZ3JhbS5odVwvIiwiaWF0IjoxNTkxODA4ODg3LCJuYmYiOjE1OTE4MDg4ODcsImRhdGEiOnsidXNlcm5hbWUiOiJqb3pzaSIsInVzZXJfaWQiOjgsImZpcnN0X25hbWUiOiJKXHUwMGYzenNlZiIsImxhc3RfbmFtZSI6IkZla2V0ZSIsImVtYWlsIjoiIn19.QzN9FyPmTl1Lhbd57PThNiqz8ZelIJTr-3F-cI75ACg"
+}
+
+Event creation:
+-URL
+http://localhost/working/basic-eloquent-master/testEventCreate.php
+-POST data to send:
+{
+    "event_title" : "TÁJÉKOZTATÓ",
+    "event_summary" : "das",
+    "event_details" : "<p>elmarad minden</p> asdasdasdasdasdasdas das asd asd asd as dads asd ???",
+    "event_date_start" : "2020-03-16 08:00:00",
+    "event_date_end" : "2020-05-31 00:00:00",
+}
