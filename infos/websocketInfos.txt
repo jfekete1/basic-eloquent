@@ -4,7 +4,7 @@ extract it
 
 start websocket:
 cd  ~/Documents/wsTest
-./wsify_windows_amd64.exe --webhook="http://localhost:80/api/basic-eloquent/index.php"
+./wsify_windows_amd64.exe --webhook="http://localhost:80/working/basic-eloquet-master/wsRules.php"
 
 -connect with Simple WebSocket clients:
 URL:
